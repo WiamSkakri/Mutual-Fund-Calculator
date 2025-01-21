@@ -14,21 +14,40 @@ public class MutualFundsService {
             new MutualFunds(10000, "AGTHX", "American Funds Growth Fund of America"),
             new MutualFunds(10000, "DODGX", "Dodge & Cox Stock Fund"),
             new MutualFunds(10000,"TRBCX", "T. Rowe Price Blue Chip Growth Fund")
+
+
         );
     }
 
     public double getBeta(String ticker){
         switch (ticker) {
             case "VFINX":
-                return 1.00;
+                return -0.2696298026397144;
             case "AGTHX":
-                return 1.00;
+                return -1.1464763869101418;
             case "DODGX":
-                return .98;
+                return -0.3808955146329592;
             case "TRBCX":
-                return 1.05;
+                return -0.21723522868332373;
+            case "MUAIX":
+                return 0.006218114587946719;
+            case "JLGRX":
+                return -0.2846896983315522;
+            case "TRAIX":
+                return -0.28989806427829956;
+            case "JUESX":
+                return -0.16147479253232383;
+            case "APGAX":
+                return -0.2690227570138719;
+
+            case "BSPAX":
+                return -0.28989806427829956;
+            
+            case "BASIX":
+                return -0.06815344761808527;
             default:
                 return 0.0;
+            
         }
     }
 

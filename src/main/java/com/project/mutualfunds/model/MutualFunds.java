@@ -1,26 +1,15 @@
 package com.project.mutualfunds.model;
-import java.lang.Math;
-
-
-
 
 public class MutualFunds {
     private String ticker;
     private String name;
     private double initialInvestment;
-  
-
- 
-
 
 
     public MutualFunds(double initialInvestment, String ticker, String name) {
         this.initialInvestment = initialInvestment;
         this.ticker = ticker;
         this.name = name;
-        
-   
-    
         }
 
     public double getInitialInvestment() {
@@ -37,13 +26,6 @@ public class MutualFunds {
     public String getName() {
         return this.name;
     }
-
- 
-
-
-  
-
-
     
 
 }

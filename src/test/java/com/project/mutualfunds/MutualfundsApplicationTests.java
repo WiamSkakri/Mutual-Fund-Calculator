@@ -8,6 +8,7 @@ class MutualfundsApplicationTests {
 
 	@Test
 	void contextLoads() {
+		
 	}
 
 }
