@@ -15,8 +15,19 @@ import {map} from 'rxjs/operators'
 
 export class AppComponent implements OnInit {
   title = 'frontend';
-  value: Array<{year: number, value: number}> = []
-  mutualFunds: any;
+  value: Array<{year: number, value: number}> = [
+    {year: 1 , value: 10000},
+    {year: 2 , value: 10000},
+    {year: 3 , value: 10000},
+    {year: 4 , value: 10000},
+    {year: 5 , value: 10000},
+    {year: 6 , value: 10000},
+    {year: 7 , value: 10000},
+    {year: 8 , value: 10000},
+    {year: 9 , value: 10000},
+    {year: 10 , value: 10000},
+  ]
+  mutualFunds: any = [];
 
   ticker: string | null = null
   initialInvestment: number | null = null

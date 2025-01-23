@@ -9,7 +9,7 @@
       Calculate
     </button>
   </div>
-  <div class="flex flex-row justify-between gap-x-6">
+  <div class="flex flex-row justify-between gap-x-6 mb-8">
 
     <div class="flex flex-row border border-gray-300 px-3 py-2 rounded-lg w-full">
       <div class="flex flex-col">
@@ -44,22 +44,30 @@
         />
       </div>
     </div>
-
   </div>
-  <table *ngIf="value.length > 0" class="border text-center">
-    <thead>
-    <tr>
-      <th>Year</th>
-      <th>Earnings</th>
-      <th>Balance</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let year of value">
-      <td>{{year.year}}</td>
-      <td>{{0}}</td>
-      <td>{{year.value}}</td>
-    </tr>
-    </tbody>
-  </table>
+
+  <div *ngIf="value.length > 0" class="flex flex-row gap-x-10">
+    <div>
+      <p>
+        display written information about the inputs given by user.
+        Can implement this once the new backend is configured 
+      </p>
+    </div>
+    <table class="text-center w-[70%]">
+      <thead>
+      <tr class="border-b-2 border-solid border-black">
+        <th>Year</th>
+        <th>Earnings Per Year</th>
+        <th>Balance</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let year of value" class="border-b-2 last:border-black ">
+        <td>{{year.year}}</td>
+        <td>{{0}}</td>
+        <td>{{year.value}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
