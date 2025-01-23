@@ -1,21 +1,25 @@
 package com.project.mutualfunds.service;
 
 import org.springframework.stereotype.Service;
+import com.project.mutualfunds.CustomExceptions.MutualFundsRequestsException;
+
 
 @Service
 public class MutualFundsService {
-    private final FetchBeta fetchBeta;
+
     private final MutualFundRepository mutualFundRepository;
 
-    public MutualFundsService(FetchBeta fetchBeta, MutualFundRepository mutualFundRepository) {
-        this.fetchBeta = fetchBeta;
+    public MutualFundsService(MutualFundRepository mutualFundRepository) {
         this.mutualFundRepository = mutualFundRepository;
     }
 
     // calculate future value
-    public double calculateFutureValue(MutualFundsRequests mutualFundsRequests) {
+    public double calculateFutureValue(MutualFundsRequests mutualFundsRequests, double fetchBeta) {
         if (mutualFundsRequests == null) {
-            throw new IllegalArgumentException("MutualFundsRequests cannot be null");
+            throw new MutualFundsRequestsException("MutualFundsRequests cannot be null");
+        }
+        if (fetchBeta <= 0) {
+            throw new FetchBetaException("FetchBeta should be greater than 0");
         }
         String ticker = mutualFundsRequests.ticker().name();
         String name = mutualFundsRequests.name();
@@ -41,7 +45,7 @@ public class MutualFundsService {
 
 
     // get list mutual funds
-    public List<MutualFundsDb> getAllMutualFunds(){
+    public List<MutualFundsDb> getAllMutualFunds() {
         return mutualFundRepository.findAll();
     }
 
@@ -49,7 +53,7 @@ public class MutualFundsService {
         Optional<MutualFundsDb> mutualFundsDb = mutualFundRepository.findById(id);
 
         if (mutualFundsDb.isEmpty()) {
-            throw new IllegalArgumentException("MutualFundsDb not found");
+            throw new MutualFundsRequestsException("MutualFundsDb not found");
         }
         return mutualFundsDb;
     }

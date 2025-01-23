@@ -10,8 +10,4 @@ class MutualfundsApplicationTests {
 	void contextLoads() {
 		
 	}
-	
-
-	
-
 }
