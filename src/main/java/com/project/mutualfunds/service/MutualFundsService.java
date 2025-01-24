@@ -1,8 +1,19 @@
 package com.project.mutualfunds.service;
 
+import com.project.mutualfunds.CustomExceptions.FetchBetaException;
+import com.project.mutualfunds.CustomExceptions.FetchIdException;
+import com.project.mutualfunds.dto.MutualFundsRequests;
+import com.project.mutualfunds.dto.SaveFunds;
+import com.project.mutualfunds.enums.FreeRateRiskTickers;
+import com.project.mutualfunds.enums.MarketRRTickers;
+import com.project.mutualfunds.model.MutualFundsDb;
+import com.project.mutualfunds.repository.MutualFundRepository;
 import org.springframework.stereotype.Service;
 import com.project.mutualfunds.CustomExceptions.MutualFundsRequestsException;
 
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MutualFundsService {
@@ -25,12 +36,14 @@ public class MutualFundsService {
         String name = mutualFundsRequests.name();
         double riskFreeRate = FreeRateRiskTickers.getRiskFreeRateByTicker(ticker);
         double marketReturnRate = MarketRRTickers.getMarketReturnRateByTicker(ticker);
-        double futureValue = mutualFundsRequests.InitialInvestment() * Math.pow(1 + (marketReturnRate - riskFreeRate) * fetchBeta.getBeta(ticker), mutualFundsRequests.time());
+        double futureValue = mutualFundsRequests.InitialInvestment() *
+                Math.pow(1 + (marketReturnRate - riskFreeRate) * fetchBeta, mutualFundsRequests.time());
         SaveFunds saveFunds = new SaveFunds(riskFreeRate, marketReturnRate, name, ticker);
         saveMutualFundsToDb(saveFunds);
         return futureValue;
 
     }
+
 
     private void saveMutualFundsToDb(SaveFunds saveFunds) {
 
@@ -49,7 +62,10 @@ public class MutualFundsService {
         return mutualFundRepository.findAll();
     }
 
-    public Optional<MutualFundsDb> getMutualFundsById(Long id){
+    public Optional<MutualFundsDb> getMutualFundsById(Long id) {
+        if (id == null) {
+            throw new FetchIdException("Id cannot be null");
+        }
         Optional<MutualFundsDb> mutualFundsDb = mutualFundRepository.findById(id);
 
         if (mutualFundsDb.isEmpty()) {
