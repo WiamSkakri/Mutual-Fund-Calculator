@@ -1,34 +1,45 @@
 package com.project.mutualfunds.controller;
+
+import com.project.mutualfunds.dto.MutualFundsRequests;
+import com.project.mutualfunds.model.MutualFundsDb;
 import com.project.mutualfunds.service.MutualFundsService;
-import com.project.mutualfunds.model.MutualFunds;
+import com.project.mutualfunds.util.FetchBeta;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
-
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
+import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/group_4/mutualfunds")
+@RequestMapping("/mutualfunds/requests")
 public class MutualFundsController {
 
-    @Autowired
-    private MutualFundsService mutualFundsService;
+    private final MutualFundsService mutualFundsService;
+    private final FetchBeta fetchBeta;
 
-    @GetMapping
-    @ResponseBody
-    public List<MutualFunds> getAllMutualFunds() {
+    public MutualFundsController(MutualFundsService mutualFundsService, FetchBeta fetchBeta) {
+        this.mutualFundsService = mutualFundsService;
+        this.fetchBeta = fetchBeta;
+
+    }
+
+    @PostMapping("/calculate/futureValue")
+    private ResponseEntity<Double> createMutualFunds(@RequestBody MutualFundsRequests mutualFundsRequests) {
+        return ResponseEntity.ok().body(mutualFundsService.calculateFutureValue(mutualFundsRequests, fetchBeta.getBeta(mutualFundsRequests.ticker().toString())));
+    }
+
+
+    @GetMapping("/allFunds")
+    private List<MutualFundsDb> getAllMutualFundsRequests() {
         return mutualFundsService.getAllMutualFunds();
+
     }
 
-    @GetMapping("/futurevalue")
-    @ResponseBody
-    public double calculateFutureValue(@RequestParam String ticker, @RequestParam double initialInvestment, @RequestParam Integer time) {
-        return mutualFundsService.calculateFutureValue(ticker, initialInvestment, time);
+
+    @GetMapping("/byId")
+    private Optional<MutualFundsDb> getMutualFundsById(@RequestParam Long id){
+        return mutualFundsService.getMutualFundsById(id);
     }
+
 
 }

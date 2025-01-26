@@ -1,29 +1,32 @@
-<div class="p-5 mb-10 mt-2 border-2 flex flex-row justify-between rounded-lg w-[90%] lg:w-[80%] m-auto">
-  <p>Logo</p>
-  <nav>
-    <ul class="flex flex-row gap-x-8">
-      <li>
-        <a
-          class="hover:border-b-2 hover:border-violet-300 hover:pb-1 hover:transition ease-in-out"
-          routerLink="/home"
-          routerLinkActive="pb-1 border-b-2 border-violet-500"
-          ariaCurrentWhenActive="page"
-        >
-          Home
-        </a>
-      </li>
-      <li>
-        <a
-          class="hover:border-b-2 hover:border-violet-300 hover:pb-1 hover:transition ease-in-out"
-          routerLink="/dashboard"
-          routerLinkActive="pb-1 border-b-2 border-violet-500"
-          ariaCurrentWhenActive="page"
-        >
-          Dashboard
-        </a>
-      </li>
-    </ul>
-  </nav>
+<div class="fixed top-0 w-full z-10 bg-white">
+  <div class="p-5 mt-2 border-2 flex flex-row justify-between rounded-lg w-[90%] lg:w-[80%] m-auto">
+    <p>Logo</p>
+    <nav>
+      <ul class="flex flex-row gap-x-8">
+        <li>
+          <a
+            class="hover:border-b-2 hover:border-blue-200 hover:pb-1 hover:transition ease-in-out"
+            routerLink="/home"
+            routerLinkActive="pb-1 border-b-2 border-goldman"
+            ariaCurrentWhenActive="page"
+          >
+            Home
+          </a>
+        </li>
+        <li>
+          <a
+            class="hover:border-b-2 hover:border-blue-200 hover:pb-1 hover:transition ease-in-out"
+            routerLink="/dashboard"
+            routerLinkActive="pb-1 border-b-2 border-goldman"
+            ariaCurrentWhenActive="page"
+          >
+            Dashboard
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
 </div>
 
+<br />
 <router-outlet />

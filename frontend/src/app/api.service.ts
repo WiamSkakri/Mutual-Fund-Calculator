@@ -9,10 +9,16 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  getMutualFund() : Observable<object> {
-    return this.http.get('http://localhost:8080/group_4/mutualfunds')
+  getMutualFunds() : Observable<object> {
+    return this.http.get('http://localhost:8095/mutualfunds/requests/allFunds')
   }
   getFutureValue(ticker: string, initialInvestment: number, time: number)  {
-    return this.http.get(`http://localhost:8080/group_4/mutualfunds/futurevalue?ticker=${ticker}&initialInvestment=${initialInvestment}&time=${time}`)
+    const requestBody: any = {
+      "ticker": ticker,
+      "InitialInvestment": initialInvestment,
+      "name": 'American Funds Growth Fund of America',
+      "time": time
+    }
+    return this.http.post(`http://localhost:8095/mutualfunds/requests/calculate/futureValue`, requestBody)
   }
 }

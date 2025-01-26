@@ -4,57 +4,51 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgForOf, NgIf} from '@angular/common';
 import {forkJoin, Observable} from 'rxjs';
 import {map} from 'rxjs/operators'
-import {MatIconModule} from '@angular/material/icon';
+import { ChartComponent } from '../chart/chart.component';
+
 
 @Component({
   selector: 'app-dashboard',
-  imports: [ ReactiveFormsModule, FormsModule, NgForOf, NgIf],
+  imports: [ ReactiveFormsModule, FormsModule, NgForOf, NgIf, ChartComponent],
   templateUrl: './dashboard.component.html',
 })
 
 export class DashboardComponent implements OnInit {
-    title = 'frontend';
-    value: Array<{year: number, value: number}> = [
-      {year: 1 , value: 10000},
-      {year: 2 , value: 10000},
-      {year: 3 , value: 10000},
-      {year: 4 , value: 10000},
-      {year: 5 , value: 10000},
-      {year: 6 , value: 10000},
-      {year: 7 , value: 10000},
-      {year: 8 , value: 10000},
-      {year: 9 , value: 10000},
-      {year: 10 , value: 10000},
-    ]
-    mutualFunds: any = [];
+  values: Array<{year: number, value: number}> = []
 
-    ticker: string | null = null
-    initialInvestment: number | null = null
-    time: number | null = null
+  mutualFunds: any = [];
 
-    constructor(private apiService: ApiService) { }
+  ticker: string | null = null
+  initialInvestment: number | null = 10000
+  time: number | null = 5
 
-    ngOnInit() {
-      this.apiService.getMutualFund().subscribe((data: any) => {this.mutualFunds = data;})
-    }
+  constructor(private apiService: ApiService) { }
 
-    calculateButtonClick() {
-      let newValues: Observable<{year: number, value: number}>[] = []
-      if (this.time && this.ticker && this.initialInvestment) {
-        for (let i = 1; i <= this.time; i++) newValues.push(
-          this.apiService.getFutureValue(this.ticker, this.initialInvestment, i).pipe(
-            map((data: any) => ({year: i, value: data}))))
+  ngOnInit() {
+    this.apiService.getMutualFunds().subscribe((data: any) => {
+      this.mutualFunds = data;
+      console.log(this.mutualFunds);
+    })
 
-        forkJoin(newValues).subscribe((sortedValues: { year: number, value: number }[]) => {
-          sortedValues.sort((a, b) => {
-            return a.year - b.year;
-          });
-          this.value = sortedValues
-          console.log(sortedValues)
-        })
-      } else {
-        alert("All three fields are required!")
-      }
+  }
+
+  calculateButtonClick() {
+    let newValues: Observable<{year: number, value: number}>[] = []
+    if (this.time && this.ticker && this.initialInvestment) {
+      for (let i = 1; i <= this.time; i++) newValues.push(
+        this.apiService.getFutureValue(this.ticker, this.initialInvestment, i).pipe(
+          map((data: any) => ({year: i, value: data}))))
+
+      forkJoin(newValues).subscribe((sortedValues: { year: number, value: number }[]) => {
+        sortedValues.sort((a, b) => {
+          return a.year - b.year;
+        });
+        this.values = sortedValues
+        console.log(sortedValues)
+      })
+    } else {
+      alert("All three fields are required!")
     }
   }
+}
 

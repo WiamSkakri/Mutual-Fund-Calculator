@@ -4,4 +4,9 @@
 @tailwind utilities;
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Lato, serif; font-weight: 400; font-style: normal }
+
+.cursor {
+  border-right: 2px solid #000;
+  animation: blink 0.6s step-end infinite;
+}
