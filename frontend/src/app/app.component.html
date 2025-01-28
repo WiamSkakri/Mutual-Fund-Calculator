@@ -1,24 +1,29 @@
-<div class="fixed top-0 w-full z-10 bg-white">
-  <div class="p-5 mt-2 border-2 flex flex-row justify-between rounded-lg w-[90%] lg:w-[80%] m-auto">
-    <p>Logo</p>
+<div class="fixed top-0 w-full z-10 bg-white shadow-md">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+    <div class="flex items-center space-x-3">
+      <h1 class="text-2xl font-bold text-[#003865]">GS</h1>
+    </div>
+
+
     <nav>
-      <ul class="flex flex-row gap-x-8">
+      <ul class="flex items-center space-x-8">
         <li>
           <a
-            class="hover:border-b-2 hover:border-blue-200 hover:pb-1 hover:transition ease-in-out"
             routerLink="/home"
-            routerLinkActive="pb-1 border-b-2 border-goldman"
+            routerLinkActive="text-[#003865] border-b-2 border-[#003865]"
             ariaCurrentWhenActive="page"
+            class="pb-1 border-b-2 border-transparent text-gray-600 hover:text-[#003865] hover:border-[#003865] transition-colors duration-200"
           >
             Home
           </a>
         </li>
         <li>
           <a
-            class="hover:border-b-2 hover:border-blue-200 hover:pb-1 hover:transition ease-in-out"
             routerLink="/dashboard"
-            routerLinkActive="pb-1 border-b-2 border-goldman"
+            routerLinkActive="text-[#003865] border-b-2 border-[#003865]"
             ariaCurrentWhenActive="page"
+            class="pb-1 border-b-2 border-transparent text-gray-600 hover:text-[#003865] hover:border-[#003865] transition-colors duration-200"
           >
             Dashboard
           </a>

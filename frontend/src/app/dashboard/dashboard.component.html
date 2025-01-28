@@ -1,113 +1,142 @@
-<div class="flex flex-col justify-between m-auto gap-y-4 w-[80%] lg:w-[70%] pt-20">
-  <div class="flex justify-between items-center">
-      <h1 class="text-2xl">Mutual Fund Calculator</h1>
-      <button
-        (click)="calculateButtonClick()"
-        class="py-2 px-5 bg-goldman text-white rounded-lg transition delay-150 duration-200 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-goldman"
-      >
-        Calculate
-      </button>
-    </div>
-    <div class="grid grid-cols-3 gap-x-6 mb-8">
+<div class="flex flex-col m-auto gap-y-6 w-[90%] lg:w-[70%] pt-20">
 
-      <div class="flex flex-row border border-gray-300 p-3 rounded-lg gap-x-3">
-        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="44" height="44" rx="8" fill="#F4F4F4"/>
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M18.1556 18.1674C18.1136 17.9593 18.225 17.7506 18.4213 17.6696L24.6258 15.1008C25.3047 14.8209 26.0821 15.1439 26.3627 15.8226L27.224 17.9114C27.2808 18.0484 27.2653 18.2047 27.1828 18.328C27.1003 18.4512 26.9616 18.5251 26.8133 18.5248H18.5911C18.3793 18.5246 18.1971 18.3751 18.1556 18.1674ZM26.1111 22.9692H28.7778C29.0233 22.9692 29.2222 23.1682 29.2222 23.4136V25.1914C29.2222 25.4369 29.0233 25.6359 28.7778 25.6359H26.1111C25.8657 25.6359 25.6667 25.4369 25.6667 25.1914V23.4136C25.6667 23.1682 25.8657 22.9692 26.1111 22.9692ZM26.5556 24.3025C26.5556 24.548 26.7546 24.747 27 24.747C27.2455 24.747 27.4445 24.548 27.4445 24.3025C27.4445 24.0571 27.2455 23.8581 27 23.8581C26.7546 23.8581 26.5556 24.0571 26.5556 24.3025ZM29.2222 21.1914V20.747C29.2213 20.011 28.6249 19.4146 27.8889 19.4136H16.3333C15.5974 19.4146 15.001 20.011 15 20.747V27.8581C15.001 28.5941 15.5974 29.1904 16.3333 29.1914H27.8889C28.6249 29.1904 29.2213 28.5941 29.2222 27.8581V27.4136C29.2222 27.1682 29.0233 26.9692 28.7778 26.9692H25.6667C24.9307 26.9682 24.3343 26.3718 24.3333 25.6359V22.9692C24.3343 22.2332 24.9307 21.6368 25.6667 21.6359H28.7778C29.0233 21.6359 29.2222 21.4369 29.2222 21.1914Z" fill="black"/>
-        </svg>
-        <div class="flex flex-col w-full">
-          <label for="funds" class="text-xs text-gray-400">Mutual Fund</label>
-          <select [(ngModel)]="ticker!" class=" focus:outline-none w-full block text-xl" id="funds" >
-            <option value="" selected class="text-gray-400 text-sm">Select Fund</option>
-            <option class="text-sm" *ngFor="let mutualFund of mutualFunds" [value]="mutualFund.ticker!">{{ mutualFund.name }}</option>
-          </select>
-        </div>
-      </div>
+  <div class="flex items-center justify-between bg-white p-4 rounded-md">
+    <h1 class="text-2xl font-bold text-[#003865]">
+      Mutual Fund Calculator
+    </h1>
+    <button
+      (click)="calculateButtonClick()"
+      class="py-2 px-6 bg-[#003865] text-white text-sm font-medium rounded-md shadow-md
+           hover:bg-[#00274d] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#003865]
+           transition transform hover:-translate-y-1 hover:scale-105"
+    >
+      Calculate
+    </button>
+  </div>
 
-      <div class="flex flex-row border border-gray-300 p-3 rounded-lg gap-x-3">
-        <svg width="45" height="44" viewBox="0 0 45 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="0.333374" width="44" height="44" rx="8" fill="#F4F4F4"/>
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M25.8573 16.6667H27.143C27.3161 16.6667 27.4729 16.5582 27.539 16.392C27.6058 16.2267 27.569 16.0347 27.4464 15.9075L26.1607 14.5742C26.0381 14.4471 25.8547 14.4107 25.6936 14.4782C25.5333 14.5467 25.4287 14.7093 25.4287 14.8889V16.2222C25.4287 16.4676 25.6207 16.6667 25.8573 16.6667ZM21.143 22H25.4287V20.2222H21.143V22ZM26.2858 19.7778C26.2858 19.5324 26.0938 19.3333 25.8573 19.3333H18.143C17.9064 19.3333 17.7144 19.5324 17.7144 19.7778V27.7778C17.7144 28.0231 17.9064 28.2222 18.143 28.2222H25.8573C26.0938 28.2222 26.2858 28.0231 26.2858 27.7778V19.7778ZM17.7144 16.6667C17.7144 17.1582 18.0984 17.5556 18.5715 17.5556H22.0002C22.4732 17.5556 22.8572 17.1582 22.8572 16.6667C22.8572 16.1751 22.4732 15.7778 22.0002 15.7778H18.5715C18.0984 15.7778 17.7144 16.1751 17.7144 16.6667ZM28.0001 18V28.3929C28.0001 29.2791 27.3539 30 26.5584 30H17.4418C16.6465 30 16.0001 29.2791 16.0001 28.3929V15.6071C16.0001 14.7209 16.6465 14 17.4418 14H24.143C24.3795 14 24.5715 14.1991 24.5715 14.4444V16.2222C24.5715 16.9573 25.1483 17.5556 25.8573 17.5556H27.5715C27.8081 17.5556 28.0001 17.7547 28.0001 18ZM18.5715 22H20.2859V20.2222H18.5715V22ZM21.143 27.3333H25.4287V22.8889H21.143V27.3333ZM18.5715 27.3333H20.2859V22.8889H18.5715V27.3333Z" fill="black"/>
-        </svg>
-        <div class="flex flex-col w-full">
-          <label for="initialInvestment" class="text-xs text-gray-400">Initial Investment Amount</label>
-          <input
-            class="focus:outline-none text-xl w-full "
-            id="initialInvestment"
-            type="number"
-            placeholder="$"
-            [(ngModel)]="initialInvestment!"
-            required
-          />
-        </div>
-      </div>
 
-      <div class="flex flex-row border border-gray-300 p-3 rounded-lg gap-x-3">
-        <svg width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="0.666687" y="0.5" width="44" height="44" rx="8" fill="#F4F4F4"/>
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M22.9999 14.5C18.5816 14.5 14.9999 18.0817 14.9999 22.5C14.9999 26.9183 18.5816 30.5 22.9999 30.5C27.4182 30.5 30.9999 26.9183 30.9999 22.5C30.995 18.0838 27.4161 14.5049 22.9999 14.5ZM22.9999 28.7222C19.5635 28.7222 16.7777 25.9364 16.7777 22.5C16.7777 19.0636 19.5635 16.2778 22.9999 16.2778C26.4363 16.2778 29.2221 19.0636 29.2221 22.5C29.2182 25.9348 26.4347 28.7183 22.9999 28.7222ZM25.6485 24.5138C25.7299 24.203 25.6372 23.8725 25.4061 23.6493L23.8888 22.132V18.9445C23.8888 18.4535 23.4908 18.0556 22.9999 18.0556C22.509 18.0556 22.111 18.4535 22.111 18.9445V22.5C22.1111 22.7357 22.2047 22.9618 22.3715 23.1285L24.1492 24.9062C24.3724 25.1373 24.7029 25.23 25.0137 25.1486C25.3245 25.0673 25.5672 24.8246 25.6485 24.5138Z" fill="black"/>
-        </svg>
-        <div class="flex flex-col w-full">
-          <label for="time" class="text-xs text-gray-400">Time Horizon (in years)</label>
-          <input
-            class="focus:outline-none text-xl w-full"
-            id="time"
-            type="number"
-            placeholder="0"
-            [(ngModel)]="time"
-            required
-          />
-        </div>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <div class="group flex items-center border border-gray-300 p-4 rounded-lg shadow-sm bg-white transition-colors duration-200 hover:border-gray-400 focus-within:border-[#003865] focus-within:shadow-md">
+      <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="44" height="44" rx="8" fill="#F4F4F4" />
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M18.1556 18.1674C18.1136 17.9593 18.225 17.7506 18.4213 17.6696L24.6258 15.1008C25.3047 14.8209 26.0821 15.1439 26.3627 15.8226L27.224 17.9114C27.2808 18.0484 27.2653 18.2047 27.1828 18.328C27.1003 18.4512 26.9616 18.5251 26.8133 18.5248H18.5911C18.3793 18.5246 18.1971 18.3751 18.1556 18.1674ZM26.1111 22.9692H28.7778C29.0233 22.9692 29.2222 23.1682 29.2222 23.4136V25.1914C29.2222 25.4369 29.0233 25.6359 28.7778 25.6359H26.1111C25.8657 25.6359 25.6667 25.4369 25.6667 25.1914V23.4136C25.6667 23.1682 25.8657 22.9692 26.1111 22.9692ZM26.5556 24.3025C26.5556 24.548 26.7546 24.747 27 24.747C27.2455 24.747 27.4445 24.548 27.4445 24.3025C27.4445 24.0571 27.2455 23.8581 27 23.8581C26.7546 23.8581 26.5556 24.0571 26.5556 24.3025ZM29.2222 21.1914V20.747C29.2213 20.011 28.6249 19.4146 27.8889 19.4136H16.3333C15.5974 19.4146 15.001 20.011 15 20.747V27.8581C15.001 28.5941 15.5974 29.1904 16.3333 29.1914H27.8889C28.6249 29.1904 29.2213 28.5941 29.2222 27.8581V27.4136C29.2222 27.1682 29.0233 26.9692 28.7778 26.9692H25.6667C24.9307 26.9682 24.3343 26.3718 24.3333 25.6359V22.9692C24.3343 22.2332 24.9307 21.6368 25.6667 21.6359H28.7778C29.0233 21.6359 29.2222 21.4369 29.2222 21.1914Z"
+          fill="black"
+        />
+      </svg>
+      <div class="ml-4 flex flex-col w-full">
+        <label for="funds" class="text-sm text-gray-500">Mutual Fund</label>
+        <select
+          [(ngModel)]="ticker!"
+          id="funds"
+          class="focus:outline-none w-full text-gray-700 text-lg"
+        >
+          <option value="" selected class="text-gray-400">Select Fund</option>
+          <option *ngFor="let mutualFund of mutualFunds" [value]="mutualFund.ticker!">
+            {{ mutualFund.name }}
+          </option>
+        </select>
       </div>
     </div>
 
-    <div *ngIf="values.length > 0" class="grid grid-cols-2 gap-x-10">
-      <table>
-        <thead>
-          <tr class="text-xl mb-5">Results Summary</tr>
-        </thead>
 
-        <tbody>
-          <tr>
-            <td>Starting Amount (USD)</td>
-            <td>{{initialInvestment}}</td>
-          </tr>
+    <div class="group flex items-center border border-gray-300 p-4 rounded-lg shadow-sm bg-white transition-colors duration-200 hover:border-gray-400 focus-within:border-[#003865] focus-within:shadow-md">
+      <svg width="45" height="44" viewBox="0 0 45 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0.333374" width="44" height="44" rx="8" fill="#F4F4F4" />
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M25.8573 16.6667H27.143C27.3161 16.6667 27.4729 16.5582 27.539 16.392C27.6058 16.2267 27.569 16.0347 27.4464 15.9075L26.1607 14.5742C26.0381 14.4471 25.8547 14.4107 25.6936 14.4782C25.5333 14.5467 25.4287 14.7093 25.4287 14.8889V16.2222C25.4287 16.4676 25.6207 16.6667 25.8573 16.6667ZM21.143 22H25.4287V20.2222H21.143V22ZM26.2858 19.7778C26.2858 19.5324 26.0938 19.3333 25.8573 19.3333H18.143C17.9064 19.3333 17.7144 19.5324 17.7144 19.7778V27.7778C17.7144 28.0231 17.9064 28.2222 18.143 28.2222H25.8573C26.0938 28.2222 26.2858 28.0231 26.2858 27.7778V19.7778ZM17.7144 16.6667C17.7144 17.1582 18.0984 17.5556 18.5715 17.5556H22.0002C22.4732 17.5556 22.8572 17.1582 22.8572 16.6667C22.8572 16.1751 22.4732 15.7778 22.0002 15.7778H18.5715C18.0984 15.7778 17.7144 16.1751 17.7144 16.6667ZM28.0001 18V28.3929C28.0001 29.2791 27.3539 30 26.5584 30H17.4418C16.6465 30 16.0001 29.2791 16.0001 28.3929V15.6071C16.0001 14.7209 16.6465 14 17.4418 14H24.143C24.3795 14 24.5715 14.1991 24.5715 14.4444V16.2222C24.5715 16.9573 25.1483 17.5556 25.8573 17.5556H27.5715C27.8081 17.5556 28.0001 17.7547 28.0001 18ZM18.5715 22H20.2859V20.2222H18.5715V22ZM21.143 27.3333H25.4287V22.8889H21.143V27.3333ZM18.5715 27.3333H20.2859V22.8889H18.5715V27.3333Z"
+          fill="black"
+        />
+      </svg>
+      <div class="ml-4 flex flex-col w-full">
+        <label for="initialInvestment" class="text-sm text-gray-500">Initial Investment Amount</label>
+        <input
+          id="initialInvestment"
+          type="number"
+          placeholder="$"
+          [(ngModel)]="initialInvestment!"
+          required
+          class="focus:outline-none w-full text-gray-700 text-lg"
+        />
+      </div>
+    </div>
 
-          <tr>
-            <td>Time Horizon</td>
-            <td>{{time}}</td>
-          </tr>
 
-          <tr>
-            <td>Return Rate</td>
-            <td>{{0}}</td>
-          </tr>
-
-          <tr>
-            <td>Risk Free Rate</td>
-            <td>{{0}}</td>
-          </tr>
-
-          <tr>
-            <td>Mutual Fund Beta</td>
-            <td>{{1}}</td>
-          </tr>
-
-          <tr>
-            <td>Earnings(USD)</td>
-            <td>{{initialInvestment}}</td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td>Total Balance (USD)</td>
-            <td>{{values[0].value}}</td>
-          </tr>
-        </tfoot>
-      </table>
-      <div>
-        <h2 class="text-xl mb-5">Investment Balance By Year</h2>
-        <app-chart [investmentData]="values"></app-chart>
+    <div class="group flex items-center border border-gray-300 p-4 rounded-lg shadow-sm bg-white transition-colors duration-200 hover:border-gray-400 focus-within:border-[#003865] focus-within:shadow-md">
+      <svg class="w-12 h-12" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0.666687" y="0.5" width="44" height="44" rx="8" fill="#F4F4F4" />
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M22.9999 14.5C18.5816 14.5 14.9999 18.0817 14.9999 22.5C14.9999 26.9183 18.5816 30.5 22.9999 30.5C27.4182 30.5 30.9999 26.9183 30.9999 22.5C30.995 18.0838 27.4161 14.5049 22.9999 14.5ZM22.9999 28.7222C19.5635 28.7222 16.7777 25.9364 16.7777 22.5C16.7777 19.0636 19.5635 16.2778 22.9999 16.2778C26.4363 16.2778 29.2221 19.0636 29.2221 22.5C29.2182 25.9348 26.4347 28.7183 22.9999 28.7222ZM25.6485 24.5138C25.7299 24.203 25.6372 23.8725 25.4061 23.6493L23.8888 22.132V18.9445C23.8888 18.4535 23.4908 18.0556 22.9999 18.0556C22.509 18.0556 22.111 18.4535 22.111 18.9445V22.5C22.1111 22.7357 22.2047 22.9618 22.3715 23.1285L24.1492 24.9062C24.3724 25.1373 24.7029 25.23 25.0137 25.1486C25.3245 25.0673 25.5672 24.8246 25.6485 24.5138Z"
+          fill="black"
+        />
+      </svg>
+      <div class="ml-4 flex flex-col w-full">
+        <label for="time" class="text-sm text-gray-500">Time Horizon (in years)</label>
+        <input
+          id="time"
+          type="number"
+          placeholder="0"
+          [(ngModel)]="time"
+          required
+          class="focus:outline-none w-full text-gray-700 text-lg"
+        />
       </div>
     </div>
   </div>
+
+
+  <div *ngIf="values.length > 0" class="grid grid-cols-1 lg:grid-cols-2 gap-10 mt-6">
+
+    <div class="bg-white shadow-md rounded-lg p-6">
+      <h2 class="text-lg font-bold text-[#003865] mb-4">Results Summary</h2>
+      <table class="w-full text-left">
+        <tbody class="divide-y divide-gray-200">
+        <tr>
+          <td class="py-2 text-gray-600">Starting Amount (USD)</td>
+          <td class="py-2 text-gray-800 font-semibold">{{ initialInvestment }}</td>
+        </tr>
+        <tr>
+          <td class="py-2 text-gray-600">Time Horizon</td>
+          <td class="py-2 text-gray-800 font-semibold">{{ time }}</td>
+        </tr>
+        <tr>
+          <td class="py-2 text-gray-600">Return Rate</td>
+          <td class="py-2 text-gray-800 font-semibold">{{ 0 }}</td>
+        </tr>
+        <tr>
+          <td class="py-2 text-gray-600">Risk Free Rate</td>
+          <td class="py-2 text-gray-800 font-semibold">{{ 0 }}</td>
+        </tr>
+        <tr>
+          <td class="py-2 text-gray-600">Mutual Fund Beta</td>
+          <td class="py-2 text-gray-800 font-semibold">{{ 1 }}</td>
+        </tr>
+        <tr>
+          <td class="py-2 text-gray-600">Earnings (USD)</td>
+          <td class="py-2 text-gray-800 font-semibold">{{ initialInvestment }}</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr class="font-bold text-gray-900">
+          <td class="py-2">Total Balance (USD)</td>
+          <td class="py-2">{{ values[0].value }}</td>
+        </tr>
+        </tfoot>
+      </table>
+    </div>
+
+
+    <div class="bg-white shadow-md rounded-lg p-6">
+      <h2 class="text-lg font-bold text-[#003865] mb-4">Investment Balance By Year</h2>
+      <app-chart [investmentData]="values"></app-chart>
+    </div>
+  </div>
+
+</div>

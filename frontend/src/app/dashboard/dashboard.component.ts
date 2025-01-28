@@ -19,8 +19,8 @@ export class DashboardComponent implements OnInit {
   mutualFunds: any = [];
 
   ticker: string | null = null
-  initialInvestment: number | null = 10000
-  time: number | null = 5
+  initialInvestment: number | null = null
+  time: number | null = null
 
   constructor(private apiService: ApiService) { }
 
