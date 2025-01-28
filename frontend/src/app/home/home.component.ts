@@ -1,13 +1,14 @@
 import {Component, OnInit} from '@angular/core';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit{
-  fullText: string = "Welcome to MUTUAL FUND CALCULATOR X"
+  fullText: string = "MUTUAL FUND CALCULATOR"
   displayedText: string = ""
   typingSpeed: number = 150
 

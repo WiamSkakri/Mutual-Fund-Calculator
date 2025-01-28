@@ -1,3 +1,39 @@
-<div class="flex flex-col justify-between m-auto gap-y-4 w-[80%] lg:w-[70%] pt-20">
-  <h1>{{ displayedText }}</h1>
+<!--<div class="flex flex-col justify-between m-auto gap-y-4 w-[80%] lg:w-[70%] pt-20">-->
+<!--  <h1>{{ displayedText }}</h1>-->
+<!--</div>-->
+<div class="home-container w-[80%] m-auto">
+  <!-- Hero Section -->
+  <header class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">{{displayedText}}</h1>
+      <p class="hero-subtitle">Powered by Goldman Sachs Emerging Leaders</p>
+      <a RouterLink="/dashboard" class="cta-button">Start Calculating</a>
+    </div>
+    <div class="hero-icons">
+      <span class="icon graph-icon">📈</span>
+      <span class="icon dollar-icon">💲</span>
+    </div>
+  </header>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <h2 class="features-title">Why Choose Our Calculator</h2>
+    <div class="features-container">
+      <div class="feature-card">
+        <div class="icon">📊</div>
+        <h3>Performance Analysis</h3>
+        <p>Track and analyze fund performance with professional-grade tools.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">💵</div>
+        <h3>Return Calculator</h3>
+        <p>Calculate potential returns based on historical data.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">📅</div>
+        <h3>Portfolio Allocation</h3>
+        <p>Optimize your portfolio with smart allocation suggestions.</p>
+      </div>
+    </div>
+  </section>
 </div>
