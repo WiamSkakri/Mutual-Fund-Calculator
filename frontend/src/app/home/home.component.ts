@@ -5,7 +5,6 @@ import {RouterLink} from '@angular/router';
   selector: 'app-home',
   imports: [RouterLink],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit{
   fullText: string = "MUTUAL FUND CALCULATOR"
