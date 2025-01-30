@@ -1,4 +1,4 @@
-<div class="flex flex-col m-auto gap-y-6 w-[90%] lg:w-[70%] pt-20">
+<div class="flex flex-col m-auto gap-y-6 w-[90%] lg:w-[70%] pt-20 pb-10">
 
   <div class="flex items-center justify-between bg-white p-4 rounded-md">
     <h1 class="text-2xl font-bold text-[#003865]">
@@ -107,26 +107,22 @@
           <td class="py-2 text-gray-800 font-semibold">{{ time }}</td>
         </tr>
         <tr>
-          <td class="py-2 text-gray-600">Return Rate</td>
-          <td class="py-2 text-gray-800 font-semibold">{{ 0 }}</td>
+          <td class="py-2 text-gray-600">Market Rate</td>
+          <td class="py-2 text-gray-800 font-semibold">{{ marketFreeRate | percent:'2.0-2' }}</td>
         </tr>
         <tr>
-          <td class="py-2 text-gray-600">Risk Free Rate</td>
-          <td class="py-2 text-gray-800 font-semibold">{{ 0 }}</td>
-        </tr>
-        <tr>
-          <td class="py-2 text-gray-600">Mutual Fund Beta</td>
-          <td class="py-2 text-gray-800 font-semibold">{{ 1 }}</td>
+          <td class="py-2 text-gray-600">Risk Rate</td>
+          <td class="py-2 text-gray-800 font-semibold">{{ riskFreeRate | percent:'1.0-2' }}</td>
         </tr>
         <tr>
           <td class="py-2 text-gray-600">Earnings (USD)</td>
-          <td class="py-2 text-gray-800 font-semibold">{{ initialInvestment }}</td>
+          <td class="py-2 text-gray-800 font-semibold">{{ initialInvestment | currency:'USD':'symbol':'1.0-0' }}</td>
         </tr>
         </tbody>
         <tfoot>
         <tr class="font-bold text-gray-900">
           <td class="py-2">Total Balance (USD)</td>
-          <td class="py-2">{{ values[0].value }}</td>
+          <td class="py-2">{{ values[values.length - 1].value | currency:'USD':'symbol':'1.0-0' }}</td>
         </tr>
         </tfoot>
       </table>

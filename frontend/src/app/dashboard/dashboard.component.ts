@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import { ApiService } from '../api.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {NgForOf, NgIf} from '@angular/common';
+import {CurrencyPipe, NgForOf, NgIf, PercentPipe} from '@angular/common';
 import {forkJoin, Observable} from 'rxjs';
 import {map} from 'rxjs/operators'
 import { ChartComponent } from '../chart/chart.component';
@@ -9,11 +9,11 @@ import { ChartComponent } from '../chart/chart.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [ ReactiveFormsModule, FormsModule, NgForOf, NgIf, ChartComponent],
+  imports: [ReactiveFormsModule, FormsModule, NgForOf, NgIf, ChartComponent, CurrencyPipe, PercentPipe],
   templateUrl: './dashboard.component.html',
 })
 
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnChanges, OnInit{
   values: Array<{year: number, value: number}> = []
 
   mutualFunds: any = [];
@@ -21,6 +21,8 @@ export class DashboardComponent implements OnInit {
   ticker: string | null = null
   initialInvestment: number | null = null
   time: number | null = null
+  marketFreeRate: number | null = null
+  riskFreeRate: number | null = null
 
   constructor(private apiService: ApiService) { }
 
@@ -29,6 +31,9 @@ export class DashboardComponent implements OnInit {
       this.mutualFunds = data;
       console.log(this.mutualFunds);
     })
+  }
+
+  ngOnChanges() {
 
   }
 
@@ -44,7 +49,14 @@ export class DashboardComponent implements OnInit {
           return a.year - b.year;
         });
         this.values = sortedValues
-        console.log(sortedValues)
+        for (const fund of this.mutualFunds) {
+          if (fund.ticker == this.ticker) {
+            this.marketFreeRate = fund.marketRate
+            console.log(this.marketFreeRate)
+            this.riskFreeRate = fund.riskRate
+
+          }
+        }
       })
     } else {
       alert("All three fields are required!")

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnChanges, Input } from '@angular/core';
 import Chart, { ChartConfiguration } from 'chart.js/auto';
 import { map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
@@ -7,7 +7,7 @@ import { Observable, of } from 'rxjs';
   selector: 'app-chart',
   templateUrl: './chart.component.html',
 })
-export class ChartComponent implements OnInit {
+export class ChartComponent implements OnChanges {
   @Input() investmentData!: Array<{ year: number, value: number }>;
   allValues: number[] = [];
   chart: Chart | undefined;
@@ -18,7 +18,7 @@ export class ChartComponent implements OnInit {
     );
   }
 
-  ngOnInit() {
+  ngOnChanges() {
     this.getValues().subscribe(vals => {
       this.allValues = vals;
       this.initializeChart();
