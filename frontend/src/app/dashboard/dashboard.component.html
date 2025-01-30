@@ -100,7 +100,7 @@
         <tbody class="divide-y divide-gray-200">
         <tr>
           <td class="py-2 text-gray-600">Starting Amount (USD)</td>
-          <td class="py-2 text-gray-800 font-semibold">{{ initialInvestment }}</td>
+          <td class="py-2 text-gray-800 font-semibold">{{ initialInvestment | currency:'USD' :'symbol':'1.0-0' }}</td>
         </tr>
         <tr>
           <td class="py-2 text-gray-600">Time Horizon</td>
@@ -116,7 +116,7 @@
         </tr>
         <tr>
           <td class="py-2 text-gray-600">Earnings (USD)</td>
-          <td class="py-2 text-gray-800 font-semibold">{{ initialInvestment | currency:'USD':'symbol':'1.0-0' }}</td>
+          <td class="py-2 text-gray-800 font-semibold">{{ earnings | currency:'USD':'symbol':'1.0-0' }}</td>
         </tr>
         </tbody>
         <tfoot>

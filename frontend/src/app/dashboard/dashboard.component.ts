@@ -23,6 +23,7 @@ export class DashboardComponent implements OnChanges, OnInit{
   time: number | null = null
   marketFreeRate: number | null = null
   riskFreeRate: number | null = null
+  earnings: number | null = null
 
   constructor(private apiService: ApiService) { }
 
@@ -49,6 +50,7 @@ export class DashboardComponent implements OnChanges, OnInit{
           return a.year - b.year;
         });
         this.values = sortedValues
+        this.earnings = this.initialInvestment ? this.values[this.values.length - 1].value - this.initialInvestment : 0
         for (const fund of this.mutualFunds) {
           if (fund.ticker == this.ticker) {
             this.marketFreeRate = fund.marketRate
