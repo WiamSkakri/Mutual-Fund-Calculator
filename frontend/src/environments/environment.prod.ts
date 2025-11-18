@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: ''  // This will be set during Railway deployment
+  apiUrl: 'https://mutual-fund-calculator-production.up.railway.app'
 };
