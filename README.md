@@ -8,6 +8,11 @@ A full-stack web application for calculating mutual fund investment returns usin
 
 <!-- Add demo GIF or video here - see instructions below -->
 
+
+https://github.com/user-attachments/assets/7ad83661-50d0-4d41-90e2-5e30174746c4
+
+
+
 ## Overview
 
 This application helps users estimate potential returns on mutual fund investments by:
