@@ -22,8 +22,13 @@ public class FetchBeta implements BetaFetcher{
         try {
             String url = String.format("%s?ticker=%s&index=%s&interval=%s&observations=%d", NEWTON_API_URL, ticker, index, interval, observations);
             HttpResponse<String> response;
-            HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).build();
+            HttpClient client = HttpClient.newBuilder()
+                    .connectTimeout(java.time.Duration.ofSeconds(30))
+                    .build();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .timeout(java.time.Duration.ofSeconds(30))
+                    .build();
 
                 response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
@@ -36,7 +41,9 @@ public class FetchBeta implements BetaFetcher{
             JsonNode jsonNode = objectMapper.readTree(responseBody);
             return jsonNode.get("data").asDouble();
         } catch (Exception e) {
-            throw new RuntimeException("Error fetching beta for " + ticker, e);
+            // If API fails or times out, return default Beta of 1.0
+            System.err.println("Error fetching beta for " + ticker + ", using default Beta=1.0: " + e.getMessage());
+            return 1.0;
         }
     }
 
