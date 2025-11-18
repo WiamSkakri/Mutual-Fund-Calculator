@@ -1,179 +1,114 @@
 # Mutual Fund Calculator
 
-## Introduction
-Mutual Fund Calculator is a **full-stack web application** designed to help users estimate potential returns on their **mutual fund investments**. Users can:
-- Select a **mutual fund ticker**
-- Input an **initial investment amount**
-- Choose an **investment duration**  
-The system then **calculates** the projected **future value** using financial models.
+A full-stack web application for calculating mutual fund investment returns using the Capital Asset Pricing Model (CAPM).
 
-This project serves as an **educational tool** for college students at a **sophomore level** in computer science or finance. By completing this project, students will gain:
-- **Full-stack development experience**
-- **Financial literacy** in mutual fund trading
-- **Hands-on exposure** to API integrations and data modeling
+## Live Demo
 
----
+**[View Live Application](https://invigorating-enthusiasm-production.up.railway.app)**
+
+<!-- Add demo GIF or video here - see instructions below -->
+
+## Overview
+
+This application helps users estimate potential returns on mutual fund investments by:
+- Selecting from 12 pre-configured mutual funds
+- Inputting an initial investment amount
+- Choosing an investment time horizon
+- Calculating projected future value using CAPM
+
+The calculator fetches real-time beta values from the Newton Analytics API and displays results with an interactive chart showing year-by-year growth.
+
+## Tech Stack
+
+**Backend**
+- Java 17
+- Spring Boot 3.3.7
+- Spring Data JPA
+- PostgreSQL
+- RESTful API
+
+**Frontend**
+- Angular 19
+- TypeScript
+- Tailwind CSS
+- Angular Material
+- Chart.js
+
+**Deployment**
+- Railway (PostgreSQL, Backend, Frontend)
+- Docker containers
 
 ## Features
-- 📊 **Calculate future value** of mutual fund investments
-- 📈 **Fetch mutual fund data** from external APIs
-- 🔗 **RESTful API endpoints** for data retrieval
-- 🎨 **Interactive UI** for input and result visualization
 
----
+- Real-time beta value fetching from external API
+- Interactive Chart.js visualization of investment growth
+- 12 mutual funds from major providers (Vanguard, JPMorgan, T. Rowe Price, etc.)
+- Responsive UI with Goldman Sachs-inspired design
+- RESTful API with CORS support
 
-## Technologies Used
-### **Backend (Spring Boot)**
-- **Java 8**
-- **Spring Boot**
-- **Spring Data JPA**
-- **PostgreSQL**
-- **RESTful APIs**
+## CAPM Formula
 
-### **Frontend (Angular)**
-- **Angular CLI**
-- **TypeScript**
-- **HTML, CSS**
-- **Tailwind CSS**
+The future value is calculated using:
 
-### **APIs Integrated**
-- **FRED API** (for market return rates)
-- **Newton Analytics API** (for mutual fund beta values)
-
----
-
-## Key Terminology
-- **Mutual Fund** – An investment pool that purchases a diversified portfolio of assets.
-  - 📌 *Example: ClearBridge Large Cap Growth Fund*
-- **Beta** – Measures volatility compared to the market. 
-  - *S&P 500 has a Beta of 1; higher values indicate greater volatility.*
-- **Return Rate** – The percentage of gain or loss over an investment period.
-
-📖 **[More Definitions](https://www.investopedia.com/)**
-
----
-
-## 📈 Mutual Fund Prediction Formula
-The **future value (FV)** is calculated using the **Capital Asset Pricing Model (CAPM)**:
-
-\[
-FV = P \times e^{r \times t}
-\]
+```
+FV = P × e^(r × t)
+```
 
 Where:
 - **P** = Principal (initial investment)
 - **r** = Risk-free rate + Beta × (Market return rate - Risk-free rate)
 - **t** = Time (years)
 
-### **Market Data Sources**
-- **Risk-free rate** → [US Treasury Interest Rate](https://fred.stlouisfed.org/series/DGS10)
-- **Market return rate** → Average historical S&P 500 return
-- **Beta values** → [Newton Analytics API](https://api.newtonanalytics.com/stock-beta/)
+## Local Development
 
----
+### Prerequisites
+- Java 17+
+- Node.js 20+
+- PostgreSQL
+- Maven
 
-## Project Structure
+### Backend Setup
 
-### **Backend (Spring Boot)**
-- **Service Layer**: Exposes **RESTful APIs** for frontend requests.
-- **Endpoints**:
-  - `GET /mutual-funds` → Fetch a list of mutual funds
-  - `GET /future-value?ticker={ticker}&amount={amount}&time={time}` → Calculate investment return
-- **Hardcoded Mutual Funds**:
-  - Sourced from **[MarketWatch Top 25 Funds](https://www.marketwatch.com/tools/top-25-mutual-funds)**
-
-### **Frontend (Angular)**
-- **Dropdown Component** → Select mutual fund ticker
-- **Input Fields** → Enter investment amount & duration
-- **Result Display** → Show predicted future value
-
----
-
-## 📅 Timeline (4-Week Plan)
-| Week  | Task |
-|-------|------|
-| **Week 1** | Setup project structure & environments |
-| **Week 2** | Develop backend API (Spring Boot) |
-| **Week 3** | Implement frontend UI (Angular) |
-| **Week 4** | Testing, UI enhancements & final presentation |
-
----
-
-## 📌 Prerequisites
-Before running the project, ensure the following tools are installed:
-
-- [IntelliJ IDEA](https://www.jetbrains.com/idea/download/?section=windows) (or any Java IDE)
-- [Git](https://www.jetbrains.com/help/idea/set-up-a-git-repository.html)
-- [Angular CLI & Node.js](https://angular.dev/tutorials/first-app)
-- [Java 8](https://www.java.com/en/download)
-
----
-
-## 🚀 Running the Project
-### **Backend (Spring Boot)**
-
-Navigate to the `backend` directory:
-   ```sh
-   cd backend
-```markdown
-### Build and Run the Application
-
-```sh
+```bash
+cd backend
 ./mvnw spring-boot:run
 ```
 
-API will be accessible at [http://localhost:8080](http://localhost:8080)
+Backend runs on http://localhost:8095
 
-### Frontend (Angular)
+### Frontend Setup
 
-Navigate to the frontend directory:
-
-```sh
+```bash
 cd frontend
-```
-
-Install dependencies:
-
-```sh
 npm install
+npm start
 ```
 
-Run the Angular app:
+Frontend runs on http://localhost:4200
 
-```sh
-ng serve
+### Database Setup
+
+Create PostgreSQL database and import seed data:
+
+```bash
+psql -U postgres -c "CREATE DATABASE mutualfunds;"
+psql -U postgres -d mutualfunds -f backend/init.sql
 ```
 
-Open [http://localhost:4200](http://localhost:4200) in a browser.
+## API Endpoints
 
-### ✨ Possible Bonus Features
+- `GET /mutualfunds/requests/allFunds` - Retrieve all mutual funds
+- `POST /mutualfunds/requests/calculate/futureValue` - Calculate investment returns
+- `GET /mutualfunds/requests/byId?id={id}` - Get fund by ID
 
-✅ **Unit Testing**  
-- **Backend:** JUnit tests  
-- **Frontend:** Jasmine tests  
+## Contributors
 
-✅ **Advanced Investment Comparisons**  
-- Allow users to compare multiple mutual funds  
-- Include ETFs and index funds  
+- Ephraim Akai-Nettey
+- Kofi Osei
+- June Mwenda
+- Wiam Skakri
+- Hiruy Worku
 
-✅ **Enhanced UI**  
-- Historical price graphs 📊  
-- Investment comparison charts 📈  
-- Smooth animations 🎨  
+## License
 
-✅ **Database Integration**  
-- Store user investments using **SQL**  
-- Display investment history in an **AG Grid** or **Graph UI**  
-  
-🔗 **GitHub Repo:** *Mutual Fund Calculator*  
-
-👥 **Contributors:** 
-- **Ephraim Akai-Nettey**
-- **Kofi Osei**
-- **June Mwenda**
-- **Wiam Skakri**  
-- **Hiruy Worku**  
-
-### 📜 License  
-This project is licensed under the **MIT License** – feel free to use and modify it as needed.  
-```
+MIT License - feel free to use and modify as needed.
