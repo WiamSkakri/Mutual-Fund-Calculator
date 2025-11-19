@@ -29,32 +29,13 @@ public class MutualFundsService {
         if (mutualFundsRequests == null) {
             throw new MutualFundsRequestsException("MutualFundsRequests cannot be null");
         }
-//        if (fetchBeta <= 0) {
-//            throw new FetchBetaException("FetchBeta should be greater than 0");
-//        }
         String ticker = mutualFundsRequests.ticker().name();
-//        String name = mutualFundsRequests.name();
         double riskFreeRate = FreeRateRiskTickers.getRiskFreeRateByTicker(ticker);
         double marketReturnRate = MarketRRTickers.getMarketReturnRateByTicker(ticker);
         double futureValue = mutualFundsRequests.InitialInvestment() *
                 Math.pow(Math.E, (riskFreeRate + (marketReturnRate - riskFreeRate) * Math.abs(fetchBeta)) * mutualFundsRequests.time());
-//        SaveFunds saveFunds = new SaveFunds(riskFreeRate, marketReturnRate, name, ticker);
-//        saveMutualFundsToDb(saveFunds);
         return futureValue;
-
     }
-
-//
-//    private void saveMutualFundsToDb(SaveFunds saveFunds) {
-//
-//        MutualFundsDb mutualFunds = new MutualFundsDb();
-//        mutualFunds.setRiskRate(saveFunds.riskFreeRate());
-//        mutualFunds.setMarketRate(saveFunds.marketReturnRate());
-//        mutualFunds.setName(saveFunds.name());
-//        mutualFunds.setTicker(saveFunds.ticker());
-//
-//        mutualFundRepository.save(mutualFunds);
-//    }
 
 
     // get list mutual funds
